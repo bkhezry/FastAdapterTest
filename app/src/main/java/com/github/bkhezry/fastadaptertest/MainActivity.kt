@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             selectOnLongClick = false
             selectionListener = object : ISelectionListener<Feature> {
                 override fun onSelectionChanged(item: Feature?, selected: Boolean) {
-                    Toast.makeText(this@MainActivity, "", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity, "SelectionChanged", Toast.LENGTH_LONG).show()
                     Log.i(
                         "FastAdapter",
                         "SelectedCount: " + selectExtension.selections.size + " ItemsCount: " + selectExtension.selectedItems.size
@@ -54,16 +54,16 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = fastAdapter
 
-        fastAdapter.onClickListener = { v: View?, _: IAdapter<Feature>, _: Feature, _: Int ->
-            if (v != null) {
-                Toast.makeText(
-                    v.context,
-                    "SelectedCount: " + selectExtension.selections.size + " ItemsCount: " + selectExtension.selectedItems.size,
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            false
-        }
+//        fastAdapter.onClickListener = { v: View?, _: IAdapter<Feature>, _: Feature, _: Int ->
+//            if (v != null) {
+//                Toast.makeText(
+//                    v.context,
+//                    "SelectedCount: " + selectExtension.selections.size + " ItemsCount: " + selectExtension.selectedItems.size,
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
+//            false
+//        }
         getEarthquakeData()
     }
 
@@ -79,6 +79,10 @@ class MainActivity : AppCompatActivity() {
         responseEarthquake = responseData
         itemAdapter.clear()
         itemAdapter.add(responseData.features)
+//        for (item in responseData.features) {
+//            val feature = Feature(item.typeString, item.properties, item.geometry, item.id)
+//            itemAdapter.add(feature)
+//        }
     }
 
     private fun handleError(error: Throwable) {
